@@ -1,0 +1,16 @@
+<launch>
+
+  <!-- Arguments -->
+  <arg name="map_file" default="$(find my_pcl_tutorial)/map/lapangan.yaml"/>
+  <arg name="open_rviz" default="false"/>	 
+
+
+  <!-- Map server -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>	
+  
+  <!-- rviz -->
+  <group if="$(arg open_rviz)"> 
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+    args="-d $(find my_pcl_tutorial)/rviz/practice_rviz.rviz"/>
+  </group>
+</launch>
