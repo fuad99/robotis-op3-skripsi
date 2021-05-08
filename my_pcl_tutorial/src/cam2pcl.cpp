@@ -34,9 +34,10 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
     cv_bridge::CvImagePtr cv_ptr = cv_bridge::toCvCopy(msg, "bgr8");
     
     cv::cvtColor(cv_ptr->image, cv_ptr->image, CV_BGR2HSV);
-    //cv::blur( cv_ptr->image, cv_ptr->image, Size(5,5));
-    // cv::inRange(cv_ptr->image,Scalar(0, 102, 106),Scalar(32, 255, 255),cv_ptr->image);
-    cv::inRange(cv_ptr->image,Scalar(21, 143, 63),Scalar(78, 255, 195),cv_ptr->image);
+    cv::blur( cv_ptr->image, cv_ptr->image, Size(9,9));
+    
+    cv::inRange(cv_ptr->image,Scalar(0, 102, 106),Scalar(32, 255, 255),cv_ptr->image);
+    // cv::inRange(cv_ptr->image,Scalar(0, 64, 40),Scalar(30, 255, 255),cv_ptr->image);
     //cv::Canny( cv_ptr->image, cv_ptr->image, 5, 80, 3);
     
     pcl::PointCloud<pcl::PointXYZ> combined;
@@ -54,10 +55,10 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
 
 				float lambda = -Cg(2) / (Qg(2) - Cg(2) );
 				float Xg = Cg(0) + lambda*( Qg(0) - Cg(0) );	
-				float Yg = Cg(1) + lambda*( Qg(1) - Cg(1) );	
+				float Yg = Cg(1) + lambda*( Qg(1) - Cg(1) );	 
 				
 				pcl::PointXYZ toPush;
-				toPush.x = -Xg; toPush.y = Yg; toPush.z = 0.0;
+				toPush.y = -Xg; toPush.x = Yg; toPush.z = 0.0;
 				combined.points.push_back(toPush);
 			} 
 		}
