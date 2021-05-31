@@ -52,10 +52,16 @@ ddd
   
   
    <node pkg="tf" type="static_transform_publisher" name="link2_broadcaster" args="-0.06 0 -0.49 0 0 0 laser_link map 100" />
-  <node pkg="tf" type="static_transform_publisher" name="link3_broadcaster" args="-0.06 0 -0.33 0 0 0 odom_laser map 100" /> 
+   <node pkg="tf" type="static_transform_publisher" name="link3_broadcaster" args="-0.06 0 -0.33 0 0 0 map odom_laser 100" /> 
 
-  
-	
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="false">
+    <rosparam command="load" file="$(find robot_localization)/params/ekf_template.yaml" />
+
+    <!--  Placeholder for output topic remapping
+    <remap from="odometry/filtered" to=""/>
+    <remap from="accel/filtered" to=""/>
+    -->
+	</node>
   <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
     <param name="video_device" value="/dev/video0" />
     <param name="image_width" value="640" />
