@@ -1,0 +1,8 @@
+image: /home/robotis/catkin_ws/src/my_pcl_tutorial/map/track.pgm
+resolution: 0.00095
+origin: [2.69, -0.9, 1.5708]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+negate: 0
+mode: raw
